@@ -1,16 +1,15 @@
 using UnityEngine;
 
+using UnityEngine.InputSystem;
+using System;
 public class Player : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    [SerializeField]  float speedMax;
+    PlayerInput playerInput;
     void Update()
     {
-        
+        var moveVec = playerInput.actions["MOVE"].ReadValue<Vector2>();
+        var moveVec3D = new Vector3(moveVec.x * speedMax, 0, moveVec.y * speedMax);
+        transform.position  = transform.position + moveVec3D * Time.deltaTime;
     }
 }
